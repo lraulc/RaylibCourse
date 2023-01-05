@@ -17,9 +17,24 @@ int main()
     isRunning = true;
     while (isRunning)
     {
+        if (!WindowShouldClose())
+        {
+        // Double buffer creation
         BeginDrawing();
-        ClearBackground(WHITE);
+
+        // Draw Start
+
+
+
+        // Window Should close
+        // Clear after finished drawing
+        ClearBackground(RED);
         EndDrawing();
+        }
+        else
+        {
+            CloseWindow();
+        }
     }
     return 0;
 }
