@@ -8,9 +8,18 @@
 int width = 720;
 int height = 512;
 
+bool isRunning = false;
 
-int main ()
+int main()
 {
-    InitWindow(width,height, "First Window");
+    // Game Loop
+    InitWindow(width, height, "First Window");
+    isRunning = true;
+    while (isRunning)
+    {
+        BeginDrawing();
+        ClearBackground(WHITE);
+        EndDrawing();
+    }
     return 0;
 }
