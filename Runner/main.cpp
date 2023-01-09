@@ -26,7 +26,12 @@ int main()
     const int height = 80;
     // Rectangle Movement
     int pos_y = window.height - height;
+    int ground = window.height - height;
     int velocity = 0;
+    const int jump_velocity = -25;
+
+    // Acceleration due to gravity (pixels / frame / frame)
+    const int gravity = 1;
     /******************************************/
 
     while (!WindowShouldClose())
@@ -35,13 +40,30 @@ int main()
         BeginDrawing();
         ClearBackground(DARKGRAY);
 
+        // Ground check
+        bool isInAir = false;
+        if (pos_y >= ground && !isInAir)
+        {
+            // Rectangle is on the ground
+            velocity = 0;
+            isInAir = false;
+        }
+        else
+        {
+            // Rectange is in the air
+            velocity += gravity;
+            isInAir = true;
+        }
+
         // Game Loop
 
         DrawRectangle(window.width / 2, pos_y, width, height, BLUE);
-        if (IsKeyDown(KEY_SPACE))
+        // Jump Check
+        if (IsKeyDown(KEY_SPACE) && !isInAir)
         {
-            velocity -= 10;
+            velocity += jump_velocity;
         }
+        // Update Position
         pos_y += velocity;
         // End Drawing
         EndDrawing();
